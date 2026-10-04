@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Account | Nova Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        .navbar {
+            background: #1d1d1f;
+            padding: 18px 40px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+            font-size: 15px;
+        }
+
+        .navbar a:hover {
+            opacity: 0.7;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 60px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .user-info {
+            border-top: 1px solid #ddd;
+            padding-top: 25px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .value {
+            color: #555;
+        }
+
+        .logout-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #0071e3;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        .logout-button:hover {
+            background: #005bb5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <a href="{% url 'home' %}">
+            Nova Store
+        </a>
+
+        <a href="{% url 'account' %}">
+            My Account
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>
+                My Account
+            </h1>
+
+            <p class="subtitle">
+                Manage your Nova Store account information.
+            </p>
+
+
+            <div class="user-info">
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Username
+                    </span>
+
+                    <span class="value">
+                        {{ user.username }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Email
+                    </span>
+
+                    <span class="value">
+                        {{ user.email }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        First Name
+                    </span>
+
+                    <span class="value">
+                        {{ user.first_name|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Last Name
+                    </span>
+
+                    <span class="value">
+                        {{ user.last_name|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Date Joined
+                    </span>
+
+                    <span class="value">
+                        {{ user.date_joined|date:"F d, Y" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <a href="{% url 'logout' %}" class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

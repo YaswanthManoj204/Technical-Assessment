@@ -1,0 +1,1771 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova Store | Premium Technology</title>
+
+    <!-- Favicon -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="{% static 'products/images/Nova-logo.png' %}"
+    >
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="{% static 'products/css/style.css' %}"
+    >
+</head>
+
+<body>
+
+    <!-- ==========================================
+         1. NAVBAR
+         ========================================== -->
+    <header class="navbar" id="navbar">
+
+        <div class="navbar-container">
+
+            <!-- Brand -->
+            <a
+                href="{% url 'home' %}"
+                class="navbar-brand"
+                style="display: flex; align-items: center; gap: 10px;"
+            >
+            <img
+                src="{% static 'products/images/Nova-logo.png' %}"
+                alt="Nova Store"
+                style="width: 38px; height: 38px; object-fit: contain;"
+            >
+
+            <span>
+                Nova Store
+            </span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav>
+
+                <ul class="navbar-links">
+
+                    <li>
+                        <a href="{% url 'home' %}">
+                            Store
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#products">
+                            Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#categories">
+                            Categories
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Deals
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <!-- Right-side Actions -->
+            <div class="navbar-actions">
+
+                <!-- Search -->
+                <button
+                    class="navbar-action-btn search-btn"
+                    aria-label="Search"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle
+                            cx="11"
+                            cy="11"
+                            r="8"
+                        ></circle>
+
+                        <line
+                            x1="21"
+                            y1="21"
+                            x2="16.65"
+                            y2="16.65"
+                        ></line>
+                    </svg>
+                </button>
+
+                <!-- User Account -->
+                {% if user.is_authenticated %}
+
+                    <a
+                        href="{% url 'account' %}"
+                        class="navbar-action-btn"
+                        aria-label="My Account"
+                        title="My Account"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="7"
+                                r="4"
+                            ></circle>
+                        </svg>
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="navbar-action-btn"
+                        aria-label="Login"
+                        title="Login"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="7"
+                                r="4"
+                            ></circle>
+                        </svg>
+                    </a>
+
+                {% endif %}
+
+                <!-- Cart -->
+                <button
+                    class="navbar-action-btn cart-btn"
+                    aria-label="Shopping Cart"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                        ></path>
+
+                        <line
+                            x1="3"
+                            y1="6"
+                            x2="21"
+                            y2="6"
+                        ></line>
+
+                        <path
+                            d="M16 10a4 4 0 0 1-8 0"
+                        ></path>
+                    </svg>
+
+                    <span
+                        class="cart-count"
+                        id="cartCount"
+                    >
+                        0
+                    </span>
+                </button>
+
+                <!-- Hamburger -->
+                <button
+                    class="hamburger"
+                    aria-label="Menu"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="22"
+                        height="22"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <line
+                            x1="3"
+                            y1="6"
+                            x2="21"
+                            y2="6"
+                        ></line>
+
+                        <line
+                            x1="3"
+                            y1="12"
+                            x2="21"
+                            y2="12"
+                        ></line>
+
+                        <line
+                            x1="3"
+                            y1="18"
+                            x2="21"
+                            y2="18"
+                        ></line>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         MOBILE NAVIGATION
+         ========================================== -->
+
+    <div
+        class="mobile-nav-overlay"
+        id="mobileNavOverlay"
+    ></div>
+
+    <nav
+        class="mobile-nav"
+        id="mobileNav"
+    >
+
+        <button
+            class="mobile-nav-close"
+            aria-label="Close Menu"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <line
+                    x1="18"
+                    y1="6"
+                    x2="6"
+                    y2="18"
+                ></line>
+
+                <line
+                    x1="6"
+                    y1="6"
+                    x2="18"
+                    y2="18"
+                ></line>
+            </svg>
+        </button>
+
+        <ul class="mobile-nav-links">
+
+            <li>
+                <a href="{% url 'home' %}">
+                    Store
+                </a>
+            </li>
+
+            <li>
+                <a href="#products">
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a href="#categories">
+                    Categories
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    Deals
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    About
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ==========================================
+         2. SEARCH OVERLAY
+         ========================================== -->
+
+    <div
+        id="searchOverlay"
+        class="search-overlay"
+    >
+
+        <button
+            class="search-close close-btn"
+            aria-label="Close Search"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                width="28"
+                height="28"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <line
+                    x1="18"
+                    y1="6"
+                    x2="6"
+                    y2="18"
+                ></line>
+
+                <line
+                    x1="6"
+                    y1="6"
+                    x2="18"
+                    y2="18"
+                ></line>
+            </svg>
+        </button>
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search-input"
+                placeholder="Search Nova Store..."
+                autocomplete="off"
+            >
+
+            <div
+                id="searchResults"
+                class="search-results"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+         ========================================== -->
+
+    <main>
+
+
+        <!-- ==========================================
+             3. HERO SECTION
+             ========================================== -->
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+                {% for banner in banners %}
+
+                    {% if forloop.first %}
+
+                        <div class="hero-content">
+
+                            {% if banner.subtitle %}
+
+                                <span class="hero-badge">
+                                    {{ banner.subtitle }}
+                                </span>
+
+                            {% endif %}
+
+
+                            <h1>
+                                {{ banner.title }}
+                            </h1>
+
+
+                            {% if banner.description %}
+
+                                <p class="hero-description">
+                                    {{ banner.description }}
+                                </p>
+
+                            {% endif %}
+
+
+                            <div class="hero-buttons">
+
+                                {% if banner.button_text and banner.button_link %}
+
+                                    <a
+                                        href="{{ banner.button_link }}"
+                                        class="btn btn-primary btn-large"
+                                    >
+                                        {{ banner.button_text }}
+                                    </a>
+
+                                {% endif %}
+
+
+                                <a
+                                    href="#products"
+                                    class="btn btn-secondary btn-large"
+                                >
+                                    Shop Now →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Dynamic Banner Image -->
+
+                        <div class="hero-image">
+
+                            {% if banner.image %}
+
+                                <img
+                                    src="{{ banner.image.url }}"
+                                    alt="{{ banner.title }}"
+                                    class="hero-product-image"
+                                >
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                {% empty %}
+
+
+                    <!-- Fallback Hero -->
+
+                    <div class="hero-content">
+
+                        <span class="hero-badge">
+                            New Release
+                        </span>
+
+                        <h1>
+                            Meet the new<br>
+                            Nova X1 Pro
+                        </h1>
+
+                        <p class="hero-tagline">
+                            Power. Precision. Simplicity.
+                        </p>
+
+                        <p class="hero-description">
+                            Designed for performance. Built for everyday life.
+                            The Nova X1 Pro pushes boundaries with its stunning
+                            display, all-day battery, and lightning-fast processor.
+                        </p>
+
+
+                        <div class="hero-buttons">
+
+                            <a
+                                href="{% url 'product_detail' 'nova-x1-pro' %}"
+                                class="btn btn-primary btn-large"
+                            >
+                                Explore Nova X1 Pro
+                            </a>
+
+                            <a
+                                href="#products"
+                                class="btn btn-secondary btn-large"
+                            >
+                                Shop Now →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-image">
+
+                        {% for product in featured_products %}
+
+                            {% if product.name == "Nova X1 Pro" %}
+
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                    class="hero-product-image"
+                                >
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             4. FEATURED PRODUCTS
+             ========================================== -->
+
+        <section
+            id="products"
+            class="featured-products reveal"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        Featured Products
+                    </h2>
+
+                    <p>
+                        Discover our latest innovations
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="productGrid"
+                    class="product-grid"
+                >
+
+                    {% for product in featured_products %}
+
+                        <div
+                            class="product-card"
+                            data-product-id="{{ product.id }}"
+                            data-name="{{ product.name }}"
+                            data-price="{{ product.price }}"
+                        >
+
+                            <div class="product-image">
+
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+
+                            <div class="product-info">
+
+                                <span class="product-category">
+                                    {{ product.category.name }}
+                                </span>
+
+
+                                <h3 class="product-name">
+                                    {{ product.name }}
+                                </h3>
+
+
+                                <p class="product-description">
+                                    {{ product.description|truncatewords:12 }}
+                                </p>
+
+
+                                <div class="product-price">
+                                    ₹{{ product.price|floatformat:0 }}
+                                </div>
+
+
+                                <div class="product-actions">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-small btn-primary add-to-cart-btn"
+                                    >
+                                        Add to Cart
+                                    </button>
+
+
+                                    <a
+                                        href="{% url 'product_detail' product.slug %}"
+                                        class="btn btn-small btn-outline"
+                                    >
+                                        Learn More
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% empty %}
+
+                        <div class="empty-products">
+
+                            <p>
+                                No featured products available right now.
+                            </p>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             5. PRODUCT SHOWCASE SECTIONS
+             ========================================== -->
+
+
+        <!-- Showcase 1: Nova X1 Pro -->
+
+        <section class="showcase showcase-1 reveal">
+
+            <div class="showcase-container">
+
+                <div class="showcase-visual showcase-visual-1">
+                {% if nova_x1_pro %}
+                <img
+                src="{{ nova_x1_pro.image.url }}"
+                alt="{{ nova_x1_pro.name }}"
+                loading="lazy"
+                 >
+                {% endif %}
+                </div>
+
+
+                <div class="showcase-text">
+
+                    <span class="showcase-label">
+                        Nova X1 Pro
+                    </span>
+
+                    <h2>
+                        Pro performance.<br>
+                        Refined design.
+                    </h2>
+
+                    <p>
+                        The Nova X1 Pro represents the pinnacle of smartphone
+                        engineering. Crafted from aerospace-grade titanium
+                        with an edge-to-edge Super Retina display, it delivers
+                        power you can feel.
+                    </p>
+
+
+                    <div class="showcase-specs">
+
+                        <div class="spec-item">
+                            6.7" OLED Display
+                        </div>
+
+                        <div class="spec-item">
+                            A20 Nova Chip
+                        </div>
+
+                        <div class="spec-item">
+                            48MP Camera System
+                        </div>
+
+                        <div class="spec-item">
+                            All-day battery
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn btn-primary">
+                        Discover Nova X1 Pro
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Showcase 2: Nova Air -->
+
+        <section class="showcase showcase-2 showcase-reverse reveal">
+
+            <div class="showcase-container">
+
+                <div class="showcase-visual showcase-visual-2">
+                {% if nova_book_pro %}
+                <img
+                src="{{ nova_book_pro.image.url }}"
+                alt="{{ nova_book_pro.name }}"
+                loading="lazy"
+                  >
+                {% endif %}
+                </div>
+
+
+                <div class="showcase-text">
+
+                    <span class="showcase-label">
+                        Nova Air
+                    </span>
+
+                    <h2>
+                        Light. Fast.<br>
+                        Effortless.
+                    </h2>
+
+                    <p>
+                        Experience computing without limits. The Nova Air
+                        delivers unprecedented performance in a remarkably
+                        thin and light enclosure. Silent, powerful, and ready
+                        for anything.
+                    </p>
+
+
+                    <div class="showcase-specs">
+
+                        <div class="spec-item">
+                            15" Liquid Retina
+                        </div>
+
+                        <div class="spec-item">
+                            Nova M4 Chip
+                        </div>
+
+                        <div class="spec-item">
+                            22-hour battery
+                        </div>
+
+                        <div class="spec-item">
+                            Weighs just 1.2kg
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn btn-primary">
+                        Discover Nova Air
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Showcase 3: Nova Watch -->
+
+        <section class="showcase showcase-3 reveal">
+
+            <div class="showcase-container">
+
+                <div class="showcase-visual showcase-visual-3">
+                {% if nova_watch_pro %}
+                <img
+                src="{{ nova_watch_pro.image.url }}"
+                alt="{{ nova_watch_pro.name }}"
+                loading="lazy"
+                 >
+                {% endif %}
+                </div>
+
+
+                <div class="showcase-text">
+
+                    <span class="showcase-label">
+                        Nova Watch
+                    </span>
+
+                    <h2>
+                        Your day.<br>
+                        At a glance.
+                    </h2>
+
+                    <p>
+                        Stay connected, active, and healthy. The new Nova Watch
+                        features a stunning edge-to-edge always-on display and
+                        breakthrough health innovations that keep you moving
+                        forward.
+                    </p>
+
+
+                    <div class="showcase-specs">
+
+                        <div class="spec-item">
+                            Always-on display
+                        </div>
+
+                        <div class="spec-item">
+                            Health monitoring
+                        </div>
+
+                        <div class="spec-item">
+                            Water resistant
+                        </div>
+
+                        <div class="spec-item">
+                            36-hour battery
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn btn-primary">
+                        Discover Nova Watch
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             6. CATEGORIES SECTION
+             ========================================== -->
+
+        <section
+            id="categories"
+            class="categories reveal"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        Shop by Category
+                    </h2>
+
+                    <p>
+                        Find exactly what you're looking for
+                    </p>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    {% for category in categories %}
+
+                        <div class="category-card">
+
+                            <div class="category-icon">
+
+                                {% if category.image %}
+
+                                    <img
+                                        src="{{ category.image.url }}"
+                                        alt="{{ category.name }}"
+                                        loading="lazy"
+                                    >
+
+                                {% else %}
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        width="40"
+                                        height="40"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+
+                                        <rect
+                                            x="3"
+                                            y="3"
+                                            width="7"
+                                            height="7"
+                                            rx="1"
+                                        ></rect>
+
+                                        <rect
+                                            x="14"
+                                            y="3"
+                                            width="7"
+                                            height="7"
+                                            rx="1"
+                                        ></rect>
+
+                                        <rect
+                                            x="14"
+                                            y="14"
+                                            width="7"
+                                            height="7"
+                                            rx="1"
+                                        ></rect>
+
+                                        <rect
+                                            x="3"
+                                            y="14"
+                                            width="7"
+                                            height="7"
+                                            rx="1"
+                                        ></rect>
+
+                                    </svg>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <h3>
+                                {{ category.name }}
+                            </h3>
+
+
+                            <p>
+                                {{ category.description|default:"Explore our latest products in this category." }}
+                            </p>
+
+                        </div>
+
+
+                    {% empty %}
+
+                        <div class="empty-products">
+
+                            <p>
+                                No categories available right now.
+                            </p>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             7. PROMOTIONAL BANNER
+             ========================================== -->
+
+       <section class="promo-section reveal">
+
+    {% if promotion %}
+
+        <div class="container">
+
+            <h2>
+                {{ promotion.title }}
+            </h2>
+
+            <p>
+                {{ promotion.description }}
+            </p>
+
+            {% if promotion.button_text and promotion.button_link %}
+                <a
+                    href="{{ promotion.button_link }}"
+                    class="btn"
+                >
+                    {{ promotion.button_text }}
+                </a>
+            {% endif %}
+
+        </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- ==========================================
+             8. WHY NOVA SECTION
+             ========================================== -->
+
+        <section class="why-nova reveal">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        The Nova Experience
+                    </h2>
+
+                    <p>
+                        Why millions choose Nova Store
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+
+                    <!-- Feature 1 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <rect
+                                    x="1"
+                                    y="3"
+                                    width="15"
+                                    height="13"
+                                ></rect>
+
+                                <polygon
+                                    points="16 8 20 8 23 11 23 16 16 16 16 8"
+                                ></polygon>
+
+                                <circle
+                                    cx="5.5"
+                                    cy="18.5"
+                                    r="2.5"
+                                ></circle>
+
+                                <circle
+                                    cx="18.5"
+                                    cy="18.5"
+                                    r="2.5"
+                                ></circle>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h3>
+                            Fast Delivery
+                        </h3>
+
+                        <p>
+                            Free express shipping on all orders over $50.
+                            Get your products faster than ever.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 2 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                ></path>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h3>
+                            Secure Payments
+                        </h3>
+
+                        <p>
+                            Your payment information is always protected
+                            with industry-leading encryption.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 3 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <polyline
+                                    points="1 4 1 10 7 10"
+                                ></polyline>
+
+                                <polyline
+                                    points="23 20 23 14 17 14"
+                                ></polyline>
+
+                                <path
+                                    d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"
+                                ></path>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h3>
+                            Easy Returns
+                        </h3>
+
+                        <p>
+                            30-day hassle-free returns and exchanges.
+                            No questions asked.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 4 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M3 18v-6a9 9 0 0 1 18 0v6"
+                                ></path>
+
+                                <path
+                                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"
+                                ></path>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h3>
+                            Premium Support
+                        </h3>
+
+                        <p>
+                            24/7 expert support for all your needs.
+                            We're here whenever you need us.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             9. NEWSLETTER
+             ========================================== -->
+
+        <section class="newsletter reveal">
+
+            <div class="container">
+
+                <h2>
+                    Stay in the loop.
+                </h2>
+
+                <p>
+                    Get the latest Nova products, offers and updates
+                    delivered to your inbox.
+                </p>
+
+
+                <form class="newsletter-form">
+
+                    <input
+                        type="email"
+                        id="newsletterEmail"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Subscribe
+                    </button>
+
+                </form>
+
+
+                <div
+                    id="newsletterMessage"
+                    class="newsletter-message"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         10. FOOTER
+         ========================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container-wide">
+
+            <div class="footer-grid">
+
+
+                <!-- Brand Column -->
+
+                <div class="footer-column">
+
+                    <h3 class="footer-brand">
+                        Nova Store
+                    </h3>
+
+                    <p class="footer-description">
+                        Designing the future of technology, one product
+                        at a time. Crafted with precision, built for you.
+                    </p>
+
+
+                    <div class="social-links">
+
+                        <a
+                            href="#"
+                            aria-label="Twitter"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                                ></path>
+
+                            </svg>
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <rect
+                                    x="2"
+                                    y="2"
+                                    width="20"
+                                    height="20"
+                                    rx="5"
+                                    ry="5"
+                                ></rect>
+
+                                <path
+                                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                                ></path>
+
+                                <line
+                                    x1="17.5"
+                                    y1="6.5"
+                                    x2="17.51"
+                                    y2="6.5"
+                                ></line>
+
+                            </svg>
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="YouTube"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.08c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"
+                                ></path>
+
+                                <polygon
+                                    points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
+                                ></polygon>
+
+                            </svg>
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="LinkedIn"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                                ></path>
+
+                                <rect
+                                    x="2"
+                                    y="9"
+                                    width="4"
+                                    height="12"
+                                ></rect>
+
+                                <circle
+                                    cx="4"
+                                    cy="4"
+                                    r="2"
+                                ></circle>
+
+                            </svg>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Shop Column -->
+
+                <div class="footer-column">
+
+                    <h4>
+                        Shop
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                Smartphones
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Laptops
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Tablets
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Wearables
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Audio
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Support Column -->
+
+                <div class="footer-column">
+
+                    <h4>
+                        Support
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                Contact Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Shipping
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Returns
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                FAQ
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Warranty
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Company Column -->
+
+                <div class="footer-column">
+
+                    <h4>
+                        Company
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                About Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Careers
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Press
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Privacy Policy
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Terms of Service
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    &copy; 2026 Nova Store. All rights reserved.
+                </p>
+
+                <div class="footer-bottom-links">
+
+                    <a href="#">
+                        Privacy
+                    </a>
+
+                    <a href="#">
+                        Terms
+                    </a>
+
+                    <a href="#">
+                        Sitemap
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==========================================
+         11. CART DRAWER
+         ========================================== -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+    ></div>
+
+
+    <div
+        class="cart-drawer"
+        id="cartDrawer"
+    >
+
+        <div class="cart-header">
+
+            <h3>
+                Your Cart
+            </h3>
+
+            <button
+                class="cart-close"
+                aria-label="Close Cart"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <line
+                        x1="18"
+                        y1="6"
+                        x2="6"
+                        y2="18"
+                    ></line>
+
+                    <line
+                        x1="6"
+                        y1="6"
+                        x2="18"
+                        y2="18"
+                    ></line>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="cart-items"
+            id="cartItems"
+        >
+            <!-- Cart items dynamically inserted here -->
+        </div>
+
+
+        <div
+            class="cart-empty"
+            id="cartEmpty"
+        >
+
+            <p>
+                Your cart is empty
+            </p>
+
+        </div>
+
+
+        <div class="cart-footer">
+
+            <div class="cart-subtotal">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="cartTotal">
+                    $0
+                </span>
+
+            </div>
+
+
+            <button
+                class="btn btn-primary cart-checkout-btn"
+            >
+                Checkout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         12. TOAST NOTIFICATION
+         ========================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <span
+            class="toast-message"
+            id="toastMessage"
+        >
+            Item added to cart
+        </span>
+
+    </div>
+
+
+    <!-- Scripts -->
+
+    <script src="{% static 'products/js/script.js' %}"></script>
+
+</body>
+</html>
