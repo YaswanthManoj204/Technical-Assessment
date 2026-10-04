@@ -12,11 +12,11 @@ Nova Store provides a dynamic product catalog, category management, banner manag
 
 **Live Website:**
 
-https://nova-store-9a6wp6w0w-yaswanthmanoj204s-projects.vercel.app/
+https://nova-store-india.vercel.app/
 
 **Admin Panel:**
 
-https://nova-store-9a6wp6w0w-yaswanthmanoj204s-projects.vercel.app/admin/
+https://nova-store-india.vercel.app/admin/login/?next=/admin/
 
 ---
 
