@@ -18,6 +18,7 @@
             box-sizing: border-box;
         }
 
+
         body {
             margin: 0;
 
@@ -86,7 +87,7 @@
 
 
         /* =========================
-           PRODUCT
+           PRODUCT CONTAINER
         ========================= */
 
         .container {
@@ -118,6 +119,10 @@
         }
 
 
+        /* =========================
+           PRODUCT IMAGE
+        ========================= */
+
         .product-image {
 
             width: 100%;
@@ -129,6 +134,10 @@
             border-radius: 18px;
         }
 
+
+        /* =========================
+           PRODUCT INFORMATION
+        ========================= */
 
         .category {
 
@@ -145,6 +154,8 @@
             font-size: 42px;
 
             margin: 0 0 20px;
+
+            line-height: 1.1;
         }
 
 
@@ -155,6 +166,8 @@
             line-height: 1.7;
 
             font-size: 17px;
+
+            margin-bottom: 25px;
         }
 
 
@@ -164,15 +177,83 @@
 
             font-weight: bold;
 
-            margin: 30px 0;
+            margin: 25px 0;
         }
 
 
-        .back-button {
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+
+            margin-top: 30px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .features h2 {
+
+            font-size: 22px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .features ul {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+
+        .features li {
+
+            position: relative;
+
+            padding-left: 28px;
+
+            margin-bottom: 13px;
+
+            color: #444;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+        }
+
+
+        .features li::before {
+
+            content: "✓";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 0;
+
+            color: #0071e3;
+
+            font-weight: bold;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           BUY NOW BUTTON
+        ========================= */
+
+        .buy-button {
 
             display: inline-block;
 
-            padding: 12px 22px;
+            padding: 14px 30px;
 
             background: #0071e3;
 
@@ -180,13 +261,21 @@
 
             text-decoration: none;
 
-            border-radius: 22px;
+            border-radius: 25px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition: 0.2s ease;
         }
 
 
-        .back-button:hover {
+        .buy-button:hover {
 
             background: #005bb5;
+
+            transform: translateY(-2px);
         }
 
 
@@ -235,6 +324,8 @@
                 grid-template-columns: 1fr;
 
                 padding: 25px;
+
+                gap: 30px;
             }
 
 
@@ -247,6 +338,12 @@
             .product-info h1 {
 
                 font-size: 32px;
+            }
+
+
+            .price {
+
+                font-size: 26px;
             }
 
         }
@@ -339,6 +436,9 @@
 
             <div class="product-info">
 
+
+                <!-- CATEGORY -->
+
                 <div class="category">
 
                     Category:
@@ -348,10 +448,18 @@
                 </div>
 
 
+
+                <!-- PRODUCT NAME -->
+
                 <h1>
+
                     {{ product.name }}
+
                 </h1>
 
+
+
+                <!-- DESCRIPTION -->
 
                 <p class="description">
 
@@ -360,6 +468,9 @@
                 </p>
 
 
+
+                <!-- PRICE -->
+
                 <div class="price">
 
                     ₹{{ product.price }}
@@ -367,12 +478,45 @@
                 </div>
 
 
+
+                <!-- FEATURES -->
+
+                {% if product.features %}
+
+                    <div class="features">
+
+                        <h2>
+                            Key Features
+                        </h2>
+
+
+                        <ul>
+
+                            {% for feature in product.features.splitlines %}
+
+                                <li>
+                                    {{ feature }}
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- BUY NOW -->
+
                 <a
-                    href="{% url 'home' %}"
-                    class="back-button"
+                    href="{% url 'login' %}"
+                    class="buy-button"
                 >
-                    Back to Store
+                    Buy Now
                 </a>
+
 
             </div>
 
